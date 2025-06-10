@@ -1,17 +1,19 @@
 import SwiftUI
-import UserNotifications
+import UserNotifications // Local-notification framework
 
 struct ContentView: View {
+    // Target time for the alarm; UI updates automatically on change
     @State private var selectedHour = 7
     @State private var selectedMinute = 0
-    @State private var alarmSet = false
+    @State private var alarmSet = false   // Tracks whether an alarm is pending
 
     var body: some View {
         VStack(spacing: 30) {
             Text("⏰ Get Up!!!!!!")
                 .font(.largeTitle)
                 .bold()
-
+            
+            // Wheel picker—hour & minute only (no date)
             DatePicker("בחר שעה", selection: bindingForTime(), displayedComponents: [.hourAndMinute])
                 .datePickerStyle(WheelDatePickerStyle())
                 .labelsHidden()
@@ -31,7 +33,9 @@ struct ContentView: View {
         }
         .padding()
     }
-
+    
+    /// Two-way binding that converts between the `DatePicker` value
+    /// and the separate hour / minute `@State` properties.
     func bindingForTime() -> Binding<Date> {
         Binding(
             get: {
@@ -47,7 +51,8 @@ struct ContentView: View {
             }
         )
     }
-
+    
+    /// Builds and registers a *one-time* local notification.
     func scheduleAlarm() {
         let content = UNMutableNotificationContent()
         content.title = "קום כבר!"
@@ -65,7 +70,8 @@ struct ContentView: View {
 
         UNUserNotificationCenter.current().add(request)
     }
-
+    
+    /// Removes the pending request so memory isn’t wasted.
     func cancelAlarm() {
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["wakeUpAlarm"])
     }
