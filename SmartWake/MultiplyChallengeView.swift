@@ -10,24 +10,24 @@ struct MultiplyChallengeView: View {
 
     var body: some View {
         VStack(spacing: 30) {
-            Text("📚 לוח הכפל")
+            Text("📚 Multiplication Table")
                 .font(.title)
                 .bold()
 
             if finished {
-                Text("✅ הצלחת! אפשר לחזור לישון 😉")
+                Text("✅ Well done! You can go back to sleep 😉")
                     .font(.title2)
                     .foregroundColor(.green)
             } else {
                 Text(question)
                     .font(.system(size: 50, weight: .bold, design: .rounded))
 
-                TextField("התשובה שלך", text: $userAnswer)
+                TextField("Your answer", text: $userAnswer)
                     .keyboardType(.numberPad)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .frame(width: 100)
 
-                Button("בדוק תשובה") {
+                Button("Check Answer") {
                     checkAnswer()
                 }
                 .padding()
@@ -35,7 +35,7 @@ struct MultiplyChallengeView: View {
                 .foregroundColor(.white)
                 .cornerRadius(10)
 
-                Text("נשארו לך \(5 - score) שאלות")
+                Text("You have \(5 - score) questions left")
                     .foregroundColor(.gray)
             }
         }

@@ -14,11 +14,11 @@ struct ContentView: View {
                 .bold()
             
             // Wheel picker—hour & minute only (no date)
-            DatePicker("בחר שעה", selection: bindingForTime(), displayedComponents: [.hourAndMinute])
+            DatePicker("Pick a time", selection: bindingForTime(), displayedComponents: [.hourAndMinute])
                 .datePickerStyle(WheelDatePickerStyle())
                 .labelsHidden()
 
-            Button(alarmSet ? "בטל שעון" : "הפעל שעון") {
+            Button(alarmSet ? "Cancel Alarm" : "Set Alarm") {
                 if alarmSet {
                     cancelAlarm()
                 } else {
@@ -55,8 +55,8 @@ struct ContentView: View {
     /// Builds and registers a *one-time* local notification.
     func scheduleAlarm() {
         let content = UNMutableNotificationContent()
-        content.title = "קום כבר!"
-        content.body = "הגיע הזמן לפתור את לוח הכפל 📚"
+        content.title = "Wake Up!"
+        content.body = "Time for the multiplication challenge 📚"
         content.sound = UNNotificationSound(named: UNNotificationSoundName("alarmSound.caf"))
         content.categoryIdentifier = "alarmCategory"
 

@@ -16,9 +16,9 @@ struct SmartWakeApp: App {
                         // Ask for alert + sound permission (minimum required)
                         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { success, error in
                             if success {
-                                print("הרשאה ניתנה ✅")
+                                print("Notification authorization granted ✅")
                             } else if let error = error {
-                                print("שגיאה בהרשאה: \(error.localizedDescription)")
+                                print("Authorization error: \(error.localizedDescription)")
                             }
                         }
                         // Listen for taps on the banner
